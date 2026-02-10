@@ -6,6 +6,7 @@
 
 body {
     background-color: bisque;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #header {
@@ -25,3 +26,37 @@ body {
     text-decoration: none;
     color: white;
 }
+
+#secondary-title {
+    text-align: center;
+    margin: 50px 0;
+}
+
+#form-recipe {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+#textarea-recipe-details {
+    width: 500px;
+    height: 250px;
+}
+
+#div-search {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+#search-dish {
+
+}
+
+#category-dish {
+
+}
+

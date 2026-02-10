@@ -6,6 +6,7 @@
 
 body {
     background-color: bisque;
+    min-height: 100%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -60,3 +61,9 @@ body {
 
 }
 
+#footer {
+    background-color: maroon;
+    height: 100px;
+    margin-top: 38px;
+
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <script src="./scirpt.js"></script>
+    <script src="./script.js" defer></script>
     <title>Document</title>
 </head>
 <body>
@@ -14,11 +14,11 @@
             <a href="favorites.html" id="favorites">Favorites</a>
         </nav>
     </header>
-    <section>
+    <section id="section-content">
         <form id="form-recipe">
             <input type="text" id="input-title" placeholder="Enter a Recipe Title">
             <textarea id="textarea-recipe-details" placeholder="Enter a Recipe"></textarea>
-            <button id="btn-add-recipe">Add Recipe</button>
+            <button type="submit" id="btn-add-recipe">Add Recipe</button>
         </form>
         <h2 id="secondary-title">Our Recipes</h2>
         <div id="div-search">
@@ -28,6 +28,9 @@
                 <option value="main-course">Main Course</option>
                 <option value="dessert">Dessert</option>
             </select>
+        </div>
+        <div id="div-new-recipe">
+
         </div>
     </section>
     <footer id="footer">

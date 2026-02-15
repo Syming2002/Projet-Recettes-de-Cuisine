@@ -11,9 +11,9 @@ const searchDish = document.getElementById("search-dish");
 
 const apply = document.getElementById("apply");
 
-const divNewRecipe = document.getElementById("div-new-recipe");
+const divFavoriteRecipe = document.getElementById("div-recipe-favorite");
 
-let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+let favoriteRecipes = JSON.parse(localStorage.getItem("favorites")) || [];
 
 let recipeId = 0;
 
@@ -34,7 +34,7 @@ function searchAndSortRecipes() {
         result = result.filter(r => r.title.toLowerCase().includes(searchDishValue));
     }
 
-    displayRecipes(result);
+    displayFavorites(result);
 }
 
 searchDish.addEventListener("input", searchAndSortRecipes);
@@ -81,35 +81,11 @@ class Favorites {
 
 const favoritesRecipes = new Favorites();
 
-function addRecipe() {
-    const inputTitleValue = inputTitle.value.trim();
-    const inputCategoryValue = inputCategory.value;
-    const textAreaRecipeDetailsValue = textAreaRecipeDetails.value.trim();
-
-    if (!inputTitleValue || !textAreaRecipeDetailsValue) return;
-
-    recipeId = recipeId + 1
-
-    const newRecipe = {
-        id: recipeId,
-        categoryDish: inputCategoryValue,
-        title: inputTitleValue,
-        details: textAreaRecipeDetailsValue
-    };
-
-    recipes.push(newRecipe);
-
-    localStorage.setItem("recipes", JSON.stringify(recipes));
-
-    displayRecipes(recipes);
-
-    formRecipe.reset();
-}
-
-function displayRecipes(recipeArray) {
-    divNewRecipe.innerHTML = "";
+function displayFavorites(recipeArray) {
+    divFavoriteRecipe.innerHTML = "";
 
     recipeArray.forEach(recipe => {
+        if (favoritesRecipes.isFavourite(recipe.id)) {
         const divRecipe = document.createElement("div");
 
         const h3RecipeTitle = document.createElement("h3");
@@ -121,7 +97,6 @@ function displayRecipes(recipeArray) {
         deleteCross.classList.add("delete-button");
 
         h3RecipeTitle.textContent = recipe.title;
-
         recipeDetails.textContent = recipe.details;
 
         starButton.textContent = favoritesRecipes.isFavourite(recipe.id) ? "⭐" : "☆";
@@ -143,24 +118,20 @@ function displayRecipes(recipeArray) {
                 favoritesRecipes.addRecipe(recipe);
             }
 
-            displayRecipes(recipeArray);
+            displayFavorites(recipeArray);
         });
 
         deleteCross.addEventListener("click", () => {
             divRecipe.remove();
             recipeArray.splice(recipe.id - 1, 1);
-            localStorage.setItem("recipes", JSON.stringify(recipeArray));
-        })
+            localStorage.setItem("recipes", JSON.stringify(recipeArray))
+            localStorage.setItem("favorites", JSON.stringify(recipeArray));
+        });
 
         divRecipe.append(h3RecipeTitle, recipeDetails, starButton, deleteCross);
-        divNewRecipe.appendChild(divRecipe);
+        divFavoriteRecipe.appendChild(divRecipe);
+    }
     });
 }
 
-formRecipe.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    addRecipe();
-});
-
-displayRecipes(recipes);
+displayFavorites(favoriteRecipes);
